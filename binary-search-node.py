@@ -1,4 +1,4 @@
-from math import floor
+# from math import floor
 
 class TreeNode(object):
     """Binary tree node."""
@@ -28,10 +28,9 @@ class ListNode(object):
         return f"<ListNode {self.data}>"
 
 
-# ListNode(floor(lst[len(lst/2)])
-
 
 def create_linked(lst = [-10,-3,0,5,9]):
+	"""given a sorted list returns a singly linked list"""
 
 	ll = []
 
@@ -53,16 +52,8 @@ def create_linked(lst = [-10,-3,0,5,9]):
 	return ll[0]
 
 
-# split into 2 functions 
-# 1st function find and return middle use slow and fast counter 
-# 2nd function get the middle node and set it to root of tree
-# base case for just one element in linked list 
-
-# set right and left nodes by recursively calling 2nd fucntion, passing in head of the tree to left 
-# and 
-
-
 def find_middle(ll):
+	"""Given a linked list returns middle node"""
 
 	prev = None
 	fast = ll
@@ -82,37 +73,37 @@ def find_middle(ll):
 	return slow
 
 
-
-
-linked_list = create_linked()
-
-# print(find_middle(linked_list))
-
-
-def sorted_list(head):
+def create_bst(head):
+	"""Given a sorted linked list returns a BST"""
 
 	# check if linked list is empty
 	if not head:
 
 		return None
 
+	# get middle node of list
 	mid = find_middle(head)
-	# print(mid)
-
+	
+	# create tree node with mid as root 
 	tree = TreeNode(mid.data)
 
 	# check if there is just one node in linked list
 	if head == mid:
 
+		# return node
 	 	return tree
 
-	tree.left = sorted_list(head)
-	tree.right = sorted_list(mid.next)
+	# recursively call function to create left and right child trees 
+	# with halves of list
+	tree.left = create_bst(head)
+	tree.right = create_bst(mid.next)
 
+	# return
 	return tree
 
 
-print(sorted_list(linked_list))
+linked_list = create_linked()
+print(create_bst(linked_list))
 
 
 
