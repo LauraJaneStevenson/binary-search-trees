@@ -101,9 +101,37 @@ def create_bst(head):
 	# return
 	return tree
 
+def find_lca(tree,n1,n2):
+	"""Given a bst and 2 nodes, return the least common ancestor or the given nodes"""
+	
+
+	parent = tree
+	
+
+	while parent:
+
+		if n1.data < parent.data and n2.data < parent.data:
+
+			parent = parent.left
+
+		if n1.data < parent.data and n2.data < parent.data:
+
+			parent = parent.right
+
+		else:
+
+			return parent
+
+	return None
+
 
 linked_list = create_linked()
-print(create_bst(linked_list))
+
+bst = create_bst(linked_list)
+
+print(find_lca(bst,TreeNode(-10),TreeNode(-3)))
+
+
 
 
 
